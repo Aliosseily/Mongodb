@@ -33,6 +33,14 @@ app.get('/', (req, res) =>{
     })
 })
 
+app.get('/read', (req, res) =>{
+    db.collection('posts').find().toArray(function(err, results) {
+        res.render('read.ejs', {
+            posts: results
+        })  
+    })
+})
+
 app.get('/default', (req, res) =>{
     db.collection('posts').find().sort({'_id': 1}).toArray(function(err, results) {
         res.render('index.ejs', {
